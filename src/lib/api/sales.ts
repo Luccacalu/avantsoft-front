@@ -31,7 +31,10 @@ export function deleteSale(id: number): Promise<void> {
   });
 }
 
-export function getSalesStats(params: SalesStatsParams = {}): Promise<SalesDailyStat[]> {
+export function getSalesStats(
+  params: SalesStatsParams = {},
+  init?: RequestInit,
+): Promise<SalesDailyStat[]> {
   const query = new URLSearchParams();
 
   Object.entries(params).forEach(([key, value]) => {
@@ -43,5 +46,5 @@ export function getSalesStats(params: SalesStatsParams = {}): Promise<SalesDaily
   const queryString = query.toString();
   const path = `${SALES_PATH}/stats${queryString ? `?${queryString}` : ''}`;
 
-  return api<SalesDailyStat[]>(path);
+  return api<SalesDailyStat[]>(path, init);
 }

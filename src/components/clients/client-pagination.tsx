@@ -1,5 +1,6 @@
 'use client';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 interface PaginationControlsProps {
   currentPage: number;
@@ -21,23 +22,25 @@ export function PaginationControls({ currentPage, totalPages }: PaginationContro
 
   return (
     <div className="flex items-center gap-4">
-      <button
+      <Button
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage <= 1}
-        className="px-4 py-2 text-sm border rounded-md disabled:opacity-50"
+        variant="outline"
+        size="sm"
       >
         Anterior
-      </button>
+      </Button>
       <span className="text-sm">
         Página {currentPage} de {totalPages}
       </span>
-      <button
+      <Button
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage >= totalPages}
-        className="px-4 py-2 text-sm border rounded-md disabled:opacity-50"
+        variant="outline"
+        size="sm"
       >
         Próximo
-      </button>
+      </Button>
     </div>
   );
 }

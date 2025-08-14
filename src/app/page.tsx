@@ -3,30 +3,25 @@
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 function LandingPage() {
   const router = useRouter();
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-center p-4">
-      <h1 className="text-4xl font-bold text-gray-800">Bem-vindo ao Sistema de Gestão</h1>
+      <h1 className="text-4xl font-bold text-gray-800">Bem-vindo ao Sistema de Gestão AvanToys!</h1>
       <p className="mt-4 text-lg text-gray-600">Você não está logado!</p>
       <p className="mt-2 text-gray-500">
         Faça o login para continuar ou registre-se para criar uma nova conta.
       </p>
       <div className="mt-8 flex gap-4">
-        <button
-          onClick={() => router.push('/login')}
-          className="px-6 py-2 font-semibold text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
-        >
+        <Button onClick={() => router.push('/login')} variant="default" size="lg">
           Fazer Login
-        </button>
-        <button
-          onClick={() => router.push('/register')}
-          className="px-6 py-2 font-semibold text-indigo-700 bg-white border border-indigo-600 rounded-md hover:bg-indigo-50"
-        >
+        </Button>
+        <Button onClick={() => router.push('/register')} variant="outline" size="lg">
           Registrar-se
-        </button>
+        </Button>
       </div>
     </div>
   );
@@ -42,29 +37,44 @@ function Dashboard() {
           <h1 className="text-3xl font-bold">Olá, {user?.name}!</h1>
           <p className="text-gray-600">Seja bem-vindo de volta ao seu painel.</p>
         </div>
-        <button
-          onClick={logout}
-          className="px-4 py-2 text-sm font-medium text-red-600 bg-red-100 border border-red-200 rounded-md hover:bg-red-200"
-        >
+        <Button onClick={logout} variant="destructive" size="sm">
           Sair
-        </button>
+        </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="p-6 bg-white rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4">Ações Rápidas</h2>
-          <div className="flex flex-col gap-3">
-            <Link href="/clients" className="text-indigo-600 hover:underline">
-              Gerenciar Clientes
+          <div className="flex flex-col gap-4">
+            <Link href="/clients">
+              <Button className="w-full" variant="default" size="lg" asChild>
+                <span>Gerenciar Clientes</span>
+              </Button>
             </Link>
-            <Link href="/sales/new" className="text-indigo-600 hover:underline">
-              Registrar Nova Venda
+            <Link href="/sales/new">
+              <Button className="w-full" variant="secondary" size="lg" asChild>
+                <span>Registrar Nova Venda</span>
+              </Button>
             </Link>
           </div>
         </div>
-        <div className="p-6 bg-white rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Estatísticas</h2>
-          <p className="text-gray-500"></p>
+        <div className="p-6 bg-white rounded-lg shadow flex flex-col justify-between">
+          <h2 className="text-xl font-semibold mb-4">Estatísticas de Vendas</h2>
+          <p className="text-gray-500 mb-4">Veja gráficos e dados das vendas realizadas.</p>
+          <Link href="/stats">
+            <Button className="w-full" variant="default" size="lg" asChild>
+              <span>Ver Estatísticas</span>
+            </Button>
+          </Link>
+        </div>
+        <div className="p-6 bg-white rounded-lg shadow flex flex-col justify-between">
+          <h2 className="text-xl font-semibold mb-4">Relatório Geral</h2>
+          <p className="text-gray-500 mb-4">Acesse o relatório completo dos clientes.</p>
+          <Link href="/clients/report">
+            <Button className="w-full" variant="secondary" size="lg" asChild>
+              <span>Ver Relatório</span>
+            </Button>
+          </Link>
         </div>
       </div>
     </main>

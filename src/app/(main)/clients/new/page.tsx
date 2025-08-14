@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/api/clients';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function NewClientPage() {
   const [name, setName] = useState('');
@@ -87,15 +88,13 @@ export default function NewClientPage() {
         {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
 
         <div className="flex gap-4 items-center">
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="px-6 py-2 font-semibold text-white bg-indigo-600 rounded-md hover:bg-indigo-700 disabled:bg-indigo-300"
-          >
+          <Button type="submit" disabled={isLoading} size="lg" className="min-w-[140px]">
             {isLoading ? 'Salvando...' : 'Salvar Cliente'}
-          </button>
-          <Link href="/clients" className="text-sm text-gray-600 hover:underline">
-            Cancelar
+          </Button>
+          <Link href="/clients">
+            <Button variant="outline" size="lg" className="min-w-[100px]" asChild>
+              <span>Cancelar</span>
+            </Button>
           </Link>
         </div>
       </form>

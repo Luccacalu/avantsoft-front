@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 import { Suspense } from 'react';
 import { getClients } from '@/lib/api/clients';
 import { ClientFilters } from '@/components/clients/client-filters';
@@ -41,11 +42,10 @@ export default async function ClientsPage({ searchParams }: ClientsPageProps) {
           <h1 className="text-3xl font-bold text-gray-800">Meus Clientes</h1>
           <p className="text-gray-600 mt-1">Busque, filtre e gerencie seus clientes.</p>
         </div>
-        <Link
-          href="/clients/new"
-          className="mt-4 md:mt-0 px-5 py-2 font-semibold text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
-        >
-          Novo Cliente
+        <Link href="/clients/new">
+          <Button className="mt-4 md:mt-0" size="lg" asChild>
+            <span>Novo Cliente</span>
+          </Button>
         </Link>
       </header>
 

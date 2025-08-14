@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -78,22 +79,20 @@ export default function LoginPage() {
           )}
 
           <div>
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full px-4 py-2 font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-300"
-            >
+            <Button type="submit" disabled={isLoading} size="lg" className="w-full">
               {isLoading ? 'Entrando...' : 'Entrar'}
-            </button>
+            </Button>
           </div>
         </form>
 
-        <p className="text-sm text-center text-gray-600">
-          Não tem uma conta?{' '}
-          <Link href="/register" className="font-medium text-indigo-600 hover:text-indigo-500">
-            Cadastre-se
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-sm text-gray-600">Não tem uma conta?</span>
+          <Link href="/register">
+            <Button variant="outline" size="sm" asChild>
+              <span>Cadastre-se</span>
+            </Button>
           </Link>
-        </p>
+        </div>
       </div>
     </main>
   );

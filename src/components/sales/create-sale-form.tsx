@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import type { Client } from '@/types';
 import { createSale } from '@/lib/api/sales';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 interface CreateSaleFormProps {
   clients: Client[];
@@ -113,15 +114,13 @@ export function CreateSaleForm({ clients }: CreateSaleFormProps) {
       {success && <p className="text-sm text-green-600">{success}</p>}
 
       <div className="flex gap-4 items-center">
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="px-6 py-2 font-semibold text-white bg-indigo-600 rounded-md hover:bg-indigo-700 disabled:bg-indigo-300"
-        >
+        <Button type="submit" disabled={isLoading} size="lg" className="min-w-[140px]">
           {isLoading ? 'Registrando...' : 'Registrar Venda'}
-        </button>
-        <Link href="/" className="text-sm text-gray-600 hover:underline">
-          Cancelar
+        </Button>
+        <Link href="/">
+          <Button variant="outline" size="lg" className="min-w-[100px]" asChild>
+            <span>Cancelar</span>
+          </Button>
         </Link>
       </div>
     </form>
