@@ -117,11 +117,9 @@ export function CreateSaleForm({ clients }: CreateSaleFormProps) {
         <Button type="submit" disabled={isLoading} size="lg" className="min-w-[140px]">
           {isLoading ? 'Registrando...' : 'Registrar Venda'}
         </Button>
-        <Link href="/">
-          <Button variant="outline" size="lg" className="min-w-[100px]" asChild>
-            <span>Cancelar</span>
-          </Button>
-        </Link>
+        <Button variant="outline" size="lg" className="min-w-[100px]" asChild>
+          <Link href="/">Cancelar</Link>
+        </Button>
       </div>
     </form>
   );

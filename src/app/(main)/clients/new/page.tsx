@@ -91,11 +91,9 @@ export default function NewClientPage() {
           <Button type="submit" disabled={isLoading} size="lg" className="min-w-[140px]">
             {isLoading ? 'Salvando...' : 'Salvar Cliente'}
           </Button>
-          <Link href="/clients">
-            <Button variant="outline" size="lg" className="min-w-[100px]" asChild>
-              <span>Cancelar</span>
-            </Button>
-          </Link>
+          <Button variant="outline" size="lg" className="min-w-[100px]" asChild>
+            <Link href="/clients">Cancelar</Link>
+          </Button>
         </div>
       </form>
     </main>

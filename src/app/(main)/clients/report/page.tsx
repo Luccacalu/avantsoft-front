@@ -6,24 +6,26 @@ import { ClientFilters } from '@/components/clients/client-filters';
 import { PaginationControls } from '@/components/clients/client-pagination';
 import { ClientReportList } from '@/components/clients/client-report-list';
 
-export default async function ClientReportPage({
-  searchParams,
-}: {
-  searchParams: {
+type ClientReportPageProps = {
+  searchParams?: Promise<{
     page?: string;
     limit?: string;
     name?: string;
     email?: string;
-  };
-}) {
-  const page = Number(searchParams.page) || 1;
-  const limit = Number(searchParams.limit) || 10;
+  }>;
+};
+
+export default async function ClientReportPage({ searchParams }: ClientReportPageProps) {
+  const params = (await searchParams) || {};
+
+  const page = Number(params.page) || 1;
+  const limit = Number(params.limit) || 10;
 
   const cookieStore = await cookies();
   const token = cookieStore.get('access_token')?.value;
 
   const report = await getClientsCustomReport(
-    { page, limit, name: searchParams.name, email: searchParams.email },
+    { page, limit, name: params.name, email: params.email },
     { headers: { Authorization: `Bearer ${token}` } },
   );
 
@@ -36,11 +38,9 @@ export default async function ClientReportPage({
             Análise detalhada de clientes e seu histórico de vendas.
           </p>
         </div>
-        <Link href="/clients">
-          <Button variant="outline" size="sm" className="mt-4 md:mt-0" asChild>
-            <span>Voltar para a lista simples</span>
-          </Button>
-        </Link>
+        <Button variant="outline" size="sm" className="mt-4 md:mt-0" asChild>
+          <Link href="/clients">Voltar para a lista simples</Link>
+        </Button>
       </header>
 
       <ClientFilters />

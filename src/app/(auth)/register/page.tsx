@@ -112,11 +112,9 @@ export default function RegisterPage() {
 
         <div className="flex flex-col items-center gap-2">
           <span className="text-sm text-gray-600">Já tem uma conta?</span>
-          <Link href="/login">
-            <Button variant="outline" size="sm" asChild>
-              <span>Faça o login</span>
-            </Button>
-          </Link>
+          <Button variant="outline" size="sm" asChild>
+            <Link href="/login">Faça o login</Link>
+          </Button>
         </div>
       </div>
     </main>

@@ -7,24 +7,25 @@ import { ClientList } from '@/components/clients/client-list';
 import { PaginationControls } from '@/components/clients/client-pagination';
 import { cookies } from 'next/headers';
 
-export default async function ClientsPage({
-  searchParams,
-}: {
-  searchParams: {
+type ClientsPageProps = {
+  searchParams?: Promise<{
     page?: string;
     limit?: string;
     name?: string;
     email?: string;
-  };
-}) {
-  const page = Number(searchParams.page) || 1;
-  const limit = Number(searchParams.limit) || 4;
+  }>;
+};
+
+export default async function ClientsPage({ searchParams }: ClientsPageProps) {
+  const params = await searchParams;
+  const page = Number(params?.page) || 1;
+  const limit = Number(params?.limit) || 4;
 
   const cookieStore = await cookies();
   const token = cookieStore.get('access_token')?.value;
 
   const response = await getClients(
-    { page, limit, name: searchParams.name, email: searchParams.email },
+    { page, limit, name: params?.name, email: params?.email },
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -42,11 +43,9 @@ export default async function ClientsPage({
           <h1 className="text-3xl font-bold text-gray-800">Meus Clientes</h1>
           <p className="text-gray-600 mt-1">Busque, filtre e gerencie seus clientes.</p>
         </div>
-        <Link href="/clients/new">
-          <Button className="mt-4 md:mt-0" size="lg" asChild>
-            <span>Novo Cliente</span>
-          </Button>
-        </Link>
+        <Button className="mt-4 md:mt-0" size="lg" asChild>
+          <Link href="/clients/new">Novo Cliente</Link>
+        </Button>
       </header>
 
       <ClientFilters />

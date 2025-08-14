@@ -46,35 +46,27 @@ function Dashboard() {
         <div className="p-6 bg-white rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4">Ações Rápidas</h2>
           <div className="flex flex-col gap-4">
-            <Link href="/clients">
-              <Button className="w-full" variant="default" size="lg" asChild>
-                <span>Gerenciar Clientes</span>
-              </Button>
-            </Link>
-            <Link href="/sales/new">
-              <Button className="w-full" variant="secondary" size="lg" asChild>
-                <span>Registrar Nova Venda</span>
-              </Button>
-            </Link>
+            <Button className="w-full" variant="default" size="lg" asChild>
+              <Link href="/clients">Gerenciar Clientes</Link>
+            </Button>
+            <Button className="w-full" variant="secondary" size="lg" asChild>
+              <Link href="/sales/new">Registrar Nova Venda</Link>
+            </Button>
           </div>
         </div>
         <div className="p-6 bg-white rounded-lg shadow flex flex-col justify-between">
           <h2 className="text-xl font-semibold mb-4">Estatísticas de Vendas</h2>
           <p className="text-gray-500 mb-4">Veja gráficos e dados das vendas realizadas.</p>
-          <Link href="/stats">
-            <Button className="w-full" variant="default" size="lg" asChild>
-              <span>Ver Estatísticas</span>
-            </Button>
-          </Link>
+          <Button className="w-full" variant="default" size="lg" asChild>
+            <Link href="/stats">Ver Estatísticas</Link>
+          </Button>
         </div>
         <div className="p-6 bg-white rounded-lg shadow flex flex-col justify-between">
           <h2 className="text-xl font-semibold mb-4">Relatório Geral</h2>
           <p className="text-gray-500 mb-4">Acesse o relatório completo dos clientes.</p>
-          <Link href="/clients/report">
-            <Button className="w-full" variant="secondary" size="lg" asChild>
-              <span>Ver Relatório</span>
-            </Button>
-          </Link>
+          <Button className="w-full" variant="secondary" size="lg" asChild>
+            <Link href="/clients/report">Ver Relatório</Link>
+          </Button>
         </div>
       </div>
     </main>

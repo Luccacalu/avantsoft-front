@@ -12,17 +12,19 @@ import { TopClientsStats } from '@/components/stats/top-clients-stats';
 import { SalesChart } from '@/components/stats/sales-chart';
 import { StatsFilters } from '@/components/stats/stats-filters';
 
-export default async function StatsPage({
-  searchParams,
-}: {
-  searchParams: {
+type StatsPageProps = {
+  searchParams?: Promise<{
     year?: string;
     month?: string;
     lastMonths?: string;
     startDate?: string;
     endDate?: string;
-  };
-}) {
+  }>;
+};
+
+export default async function StatsPage({ searchParams }: StatsPageProps) {
+  const params = (await searchParams) || {};
+
   const cookieStore = await cookies();
   const token = cookieStore.get('access_token')?.value;
 
@@ -31,10 +33,11 @@ export default async function StatsPage({
   };
 
   const statsParams = {
-    ...searchParams,
-    year: searchParams.year ? Number(searchParams.year) : undefined,
-    month: searchParams.month ? Number(searchParams.month) : undefined,
-    lastMonths: searchParams.lastMonths ? Number(searchParams.lastMonths) : undefined,
+    startDate: params.startDate,
+    endDate: params.endDate,
+    year: params.year ? Number(params.year) : undefined,
+    month: params.month ? Number(params.month) : undefined,
+    lastMonths: params.lastMonths ? Number(params.lastMonths) : undefined,
   };
 
   const [salesData, topClientTotal, topClientAverage, topClientsFrequency] = await Promise.all([
