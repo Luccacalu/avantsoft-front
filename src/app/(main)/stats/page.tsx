@@ -12,11 +12,17 @@ import { TopClientsStats } from '@/components/stats/top-clients-stats';
 import { SalesChart } from '@/components/stats/sales-chart';
 import { StatsFilters } from '@/components/stats/stats-filters';
 
-interface StatsPageProps {
-  searchParams: SalesStatsParams;
-}
-
-export default async function StatsPage({ searchParams }: StatsPageProps) {
+export default async function StatsPage({
+  searchParams,
+}: {
+  searchParams: {
+    year?: string;
+    month?: string;
+    lastMonths?: string;
+    startDate?: string;
+    endDate?: string;
+  };
+}) {
   const cookieStore = await cookies();
   const token = cookieStore.get('access_token')?.value;
 
@@ -24,8 +30,15 @@ export default async function StatsPage({ searchParams }: StatsPageProps) {
     headers: { Authorization: `Bearer ${token}` },
   };
 
+  const statsParams = {
+    ...searchParams,
+    year: searchParams.year ? Number(searchParams.year) : undefined,
+    month: searchParams.month ? Number(searchParams.month) : undefined,
+    lastMonths: searchParams.lastMonths ? Number(searchParams.lastMonths) : undefined,
+  };
+
   const [salesData, topClientTotal, topClientAverage, topClientsFrequency] = await Promise.all([
-    getSalesStats(searchParams, fetchOptions),
+    getSalesStats(statsParams, fetchOptions),
     getTopClientByTotalSales(fetchOptions),
     getTopClientByAverageSale(fetchOptions),
     getTopClientsByFrequency(fetchOptions),

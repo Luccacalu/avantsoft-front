@@ -7,16 +7,16 @@ import { ClientList } from '@/components/clients/client-list';
 import { PaginationControls } from '@/components/clients/client-pagination';
 import { cookies } from 'next/headers';
 
-interface ClientsPageProps {
+export default async function ClientsPage({
+  searchParams,
+}: {
   searchParams: {
     page?: string;
     limit?: string;
     name?: string;
     email?: string;
   };
-}
-
-export default async function ClientsPage({ searchParams }: ClientsPageProps) {
+}) {
   const page = Number(searchParams.page) || 1;
   const limit = Number(searchParams.limit) || 4;
 

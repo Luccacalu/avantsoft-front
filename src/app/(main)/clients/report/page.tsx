@@ -6,16 +6,16 @@ import { ClientFilters } from '@/components/clients/client-filters';
 import { PaginationControls } from '@/components/clients/client-pagination';
 import { ClientReportList } from '@/components/clients/client-report-list';
 
-interface ClientReportPageProps {
+export default async function ClientReportPage({
+  searchParams,
+}: {
   searchParams: {
     page?: string;
     limit?: string;
     name?: string;
     email?: string;
   };
-}
-
-export default async function ClientReportPage({ searchParams }: ClientReportPageProps) {
+}) {
   const page = Number(searchParams.page) || 1;
   const limit = Number(searchParams.limit) || 10;
 
